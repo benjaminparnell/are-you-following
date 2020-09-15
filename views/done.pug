@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="style.css")
+        title My Pet Fauxes
+    body
+        .page
+            h1.title My Pet Fauxes
+            if following
+                p.text Thanks for following us!
+            else
+                p.text It looks like you aren't following us on Spotify :(
+                form(method='POST' action='/follow')
+                    input(type="hidden" name="accessToken" value=accessToken)
+                    button(type="submit").follow-us Follow us!
