@@ -91,12 +91,16 @@ html {
   max-width: 960px;
   text-align: center;
   padding: 5px;
+  font-family: "Russo One";
+}
+
+.title,
+a {
+  color: #ff51ee;
 }
 
 .title {
-  font-family: "Russo One";
   font-size: 65pt;
-  color: #ff51ee;
 }
 
 .text {
@@ -107,6 +111,9 @@ html {
   padding: 10px 20px 10px 20px;
   border-radius: 5px;
   font-weight: 800;
+  margin-top: 20px;
+  font-size: 30pt;
+  background-color: #ff51ee;
 }
 
 @media screen and (max-width: 600px) {
@@ -116,5 +123,9 @@ html {
 
   .text {
     font-size: 20pt;
+  }
+
+  .follow-us {
+    font-size: 35pt;
   }
 }

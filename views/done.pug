@@ -10,8 +10,9 @@ html(lang="en")
             h1.title My Pet Fauxes
             if following
                 p.text Thanks for following us!
+                p.text As a thankyou, #[a(href="http://bit.ly/seeyousoondemo") here's a link to our new demo.]
             else
                 p.text It looks like you aren't following us on Spotify :(
                 form(method='POST' action='/follow')
                     input(type="hidden" name="accessToken" value=accessToken)
-                    button(type="submit").follow-us Follow us!
+                    button.follow-us(type="submit" aria-label="Follow us") Follow us!
