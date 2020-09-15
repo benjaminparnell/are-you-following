@@ -8,13 +8,15 @@ const app = express();
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const siteUrl =
+  `https://${process.env.VERCEL_URL}` || `http://localhost:${port}`;
 
 app.get("/login", (req, res) => {
   const params = {
     response_type: "code",
     client_id,
     scope: "user-follow-read",
-    redirect_uri: `http://localhost:${port}/done/`,
+    redirect_uri: `${siteUrl}/done/`,
   };
   res.redirect(
     "https://accounts.spotify.com/authorize?" + qs.stringify(params)
@@ -34,7 +36,7 @@ app.get("/done", async (req, res) => {
         form: {
           grant_type: "authorization_code",
           code: req.query.code,
-          redirect_uri: `http://localhost:${port}/done/`,
+          redirect_uri: `${siteUrl}/done/`,
         },
         responseType: "json",
       }
