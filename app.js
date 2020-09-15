@@ -59,6 +59,7 @@ app.get("/done", async (req, res) => {
 });
 
 app.get("/following", async (req, res) => {
+  const accessToken = req.query.t;
   const followResult = await got.get(
     "https://api.spotify.com/v1/me/following/contains",
     {
@@ -74,7 +75,7 @@ app.get("/following", async (req, res) => {
   );
   res.render("done", {
     following: followResult.body[0],
-    accessToken: req.query.t,
+    accessToken,
   });
 });
 
