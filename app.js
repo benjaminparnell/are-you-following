@@ -67,6 +67,7 @@ app.get("/done", async (req, res) => {
     );
     res.render("done", { following: followResult.body[0], accessToken });
   } catch (e) {
+    console.error(e.message);
     res.status(400).send("Unable to complete request");
   }
 });
