@@ -8,8 +8,9 @@ const app = express();
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const siteUrl =
-  `https://${process.env.VERCEL_URL}` || `http://localhost:${port}`;
+const siteUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : `http://localhost:${port}`;
 
 app.get("/login", (req, res) => {
   const params = {
