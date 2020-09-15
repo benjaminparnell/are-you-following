@@ -4,6 +4,7 @@ const qs = require("querystring");
 const got = require("got");
 const path = require("path");
 const bodyParser = require("body-parser");
+const { allowedNodeEnvironmentFlags } = require("process");
 
 const port = process.env.PORT || 9001;
 const app = express();
@@ -51,25 +52,30 @@ app.get("/done", async (req, res) => {
         responseType: "json",
       }
     );
-    const accessToken = tokenResult.body.access_token;
-    const followResult = await got.get(
-      "https://api.spotify.com/v1/me/following/contains",
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        searchParams: {
-          type: "artist",
-          ids: "7vO5wOUwek3MmX40zYgOem",
-        },
-        responseType: "json",
-      }
-    );
-    res.render("done", { following: followResult.body[0], accessToken });
+    res.redirect(`/following?t=${tokenResult.body.access_token}`);
   } catch (e) {
-    console.error(e.message);
     res.status(400).send("Unable to complete request");
   }
+});
+
+app.get("/following", async (req, res) => {
+  const followResult = await got.get(
+    "https://api.spotify.com/v1/me/following/contains",
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      searchParams: {
+        type: "artist",
+        ids: "7vO5wOUwek3MmX40zYgOem",
+      },
+      responseType: "json",
+    }
+  );
+  res.render("done", {
+    following: followResult.body[0],
+    accessToken: req.query.t,
+  });
 });
 
 app.post("/follow", async (req, res) => {

@@ -104,9 +104,9 @@ html {
 }
 
 .follow-us {
-    padding: 10px 20px 10px 20px;
-    border-radius: 5px;
-    font-weight: 800;
+  padding: 10px 20px 10px 20px;
+  border-radius: 5px;
+  font-weight: 800;
 }
 
 @media screen and (max-width: 600px) {
