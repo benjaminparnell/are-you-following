@@ -9,11 +9,11 @@ const { allowedNodeEnvironmentFlags } = require("process");
 const port = process.env.PORT || 9001;
 const app = express();
 
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
+const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 const isOnVercel = !!process.env.VERCEL_URL;
 const siteUrl = isOnVercel
-  ? `https://are-you-following.vercel.app`
+  ? "https://follow.mypetfauxes.com/"
   : `http://localhost:${port}`;
 
 app.set("view engine", "pug");
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   const params = {
     response_type: "code",
-    client_id,
+    client_id: spotifyClientId,
     scope: "user-follow-read user-follow-modify",
     redirect_uri: `${siteUrl}/done/`,
   };
@@ -41,7 +41,7 @@ app.get("/done", async (req, res) => {
       {
         headers: {
           Authorization: `Basic ${Buffer.from(
-            `${client_id}:${client_secret}`
+            `${spotifyClientId}:${spotifyClientSecret}`
           ).toString("base64")}`,
         },
         form: {
