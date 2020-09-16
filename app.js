@@ -13,7 +13,7 @@ const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
 const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 const isOnVercel = !!process.env.VERCEL_URL;
 const siteUrl = isOnVercel
-  ? "https://follow.mypetfauxes.com/"
+  ? "https://follow.mypetfauxes.com"
   : `http://localhost:${port}`;
 
 app.set("view engine", "pug");
